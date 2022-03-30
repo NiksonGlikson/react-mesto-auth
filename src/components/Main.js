@@ -1,52 +1,52 @@
 import React from 'react';
 import Card from '../components/Card.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import Footer from './Footer.js';
 
 
-function Main({ 
+function Main({
 	onEditAvatar,
 	onEditProfile,
 	onAddPlace,
 	onCardClick,
 	onCardLike,
 	onCardDelete,
-	cards }) 
-	{
-	
+	cards }) {
+
 	const currentUser = React.useContext(CurrentUserContext);
 
 	return (
 		<main className="main">
 			<section className="profile">
-				<button 
-				className="profile__button-avatar"
-				type="button"
-				onClick={onEditAvatar}
+				<button
+					className="profile__button-avatar"
+					type="button"
+					onClick={onEditAvatar}
 				>
-				<img 
-				className="profile__avatar"
-				name="avatar"
-				alt="Ваше фото профиля"
-				src={currentUser.avatar}
-				/>
+					<img
+						className="profile__avatar"
+						name="avatar"
+						alt="Ваше фото профиля"
+						src={currentUser.avatar}
+					/>
 				</button>
 				<div className="profile__container">
 					<div className="profile__info">
 						<div className="profile__description">
 							<h1 className="profile__title">{currentUser.name}</h1>
-							<button 
-							className="profile__button-edit"
-							type="button"
-							onClick={onEditProfile}>
+							<button
+								className="profile__button-edit"
+								type="button"
+								onClick={onEditProfile}>
 							</button>
 						</div>
 						<p className="profile__subtitle">{currentUser.about}</p>
 					</div>
 				</div>
-				<button 
-				className="profile__button-add"
-				type="button"
-				onClick={onAddPlace}>
+				<button
+					className="profile__button-add"
+					type="button"
+					onClick={onAddPlace}>
 				</button>
 			</section>
 
@@ -61,6 +61,7 @@ function Main({
 					/>
 				))}
 			</section>
+			<Footer />
 		</main>
 	);
 }

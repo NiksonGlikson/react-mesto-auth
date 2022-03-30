@@ -6,14 +6,14 @@ function EditAvatarPopup(props) {
 
 	function handleSubmit(evt) {
 		evt.preventDefault();
-	  
+
 		props.onUpdateAvatar(avatarRef.current.value);
 		props.onClose();
-	  }
+	}
 
-React.useEffect(() => {
-	avatarRef.current.value = "";
-}, [props.isOpen]);
+	React.useEffect(() => {
+		avatarRef.current.value = "";
+	}, [props.isOpen]);
 
 	return (
 		<PopupWithForm
@@ -24,22 +24,22 @@ React.useEffect(() => {
 			buttonText='Сохранить'
 			onSubmit={handleSubmit}
 		>
-				<fieldset className="pop-up__inputs">
-					<input 
-						ref={avatarRef}
-						className="pop-up__input pop-up__input_avatar"
-						id="avatar-input"
-						name="avatar"
-						defaultValue=""
-						type="url"
-						placeholder="Ссылка на картинку"
-						required
-					/>
-					<span 
-						value="error"
-						id="avatar-input-error">
-					</span>
-				</fieldset>
+			<fieldset className="pop-up__inputs">
+				<input
+					ref={avatarRef}
+					className="pop-up__input pop-up__input_avatar"
+					id="avatar-input"
+					name="avatar"
+					defaultValue=""
+					type="url"
+					placeholder="Ссылка на картинку"
+					required
+				/>
+				<span
+					value="error"
+					id="avatar-input-error">
+				</span>
+			</fieldset>
 		</PopupWithForm>
 	)
 }

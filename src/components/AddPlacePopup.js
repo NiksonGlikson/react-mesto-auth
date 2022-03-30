@@ -51,10 +51,10 @@ function AddPlacePopup(props) {
 						required
 						onChange={handleChangePlace}
 					/>
-						<span 
-							className="error"
-							id="place-input-error">
-						</span>
+					<span 
+						className="error"
+						id="place-input-error">
+					</span>
 					<input
 						className="pop-up__input pop-up__input_place"
 						id="link-input"
@@ -65,10 +65,10 @@ function AddPlacePopup(props) {
 						required
 						onChange={handleChangeLink}
 					/>
-						<span
-							className="error"
-							id="link-input-error">
-						</span>
+					<span
+						className="error"
+						id="link-input-error">
+					</span>
 				</fieldset>
 		</PopupWithForm>
 	)

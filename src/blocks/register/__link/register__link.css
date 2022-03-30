@@ -1,0 +1,19 @@
+.register__link {
+	font-size: 14px;
+	color: white;
+	font-family: Inter, Arial, sans-serif;
+	font-weight: 400;
+	line-height: 17px;
+	height: 17px;
+	padding: 0;
+	margin: 15px 0 0 0;
+	text-decoration: none;
+	background-color: transparent;
+	transition: opacity 3s;
+	border: 0;
+}
+
+.register__link:hover {
+	opacity: 0.7;
+	cursor: pointer;
+}

@@ -5,20 +5,20 @@ function DeleteCardPopup(props) {
 
 	function handleSubmit(evt) {
 		evt.preventDefault();
-	  
+
 		props.onCardDelete();
 		props.onClose();
-	  }
-	  
+	}
+
 	return (
 		<>
-		<PopupWithForm
-			title='Вы уверены?'
-			name='correction'
-			isOpen={props.isOpen}
-			onClose={props.onClose}
-			onSubmit={handleSubmit}
-			buttonText='Да'
+			<PopupWithForm
+				title='Вы уверены?'
+				name='correction'
+				isOpen={props.isOpen}
+				onClose={props.onClose}
+				onSubmit={handleSubmit}
+				buttonText='Да'
 			/>
 		</>
 	)
