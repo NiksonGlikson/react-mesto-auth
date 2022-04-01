@@ -26,6 +26,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   //хук для открытия попапа аватара
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  //хук для открытия попапа удаления
   const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
   //хук для открытия попапа с оповещением при авторизации
   const [isToolTipPopupOpen, setIsToolTipPopupOpen] = React.useState(false);
@@ -37,6 +38,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   //хук для карточек
   const [cards, setCards] = React.useState([]);
+  //хук для удаления картинки именно нашей картинки
   const [cardDelete, setCardDelete] = React.useState();
   //хук для состояния пользователя(вошел он в систему или нет)
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
