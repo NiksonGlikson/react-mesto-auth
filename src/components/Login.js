@@ -2,7 +2,9 @@ import React from "react";
 
 function Login(props) {
 
+  //хук получения пароля пользователя, для отображения в хедере
   const [password, setPassword] = React.useState('');
+  //хук для получения почты пользователя, для отображения в хедере
   const [email, setEmail] = React.useState('');
 
   function handleChangeEmail(evt) {

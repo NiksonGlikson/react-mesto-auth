@@ -20,17 +20,27 @@ import auth from "../utils/auth.js";
 
 
 function App() {
+  //хук для открытия попапа профиля
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  //хук для открытия попапа добавления новой карточки
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  //хук для открытия попапа аватара
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
+  //хук для открытия попапа с оповещением при авторизации
   const [isToolTipPopupOpen, setIsToolTipPopupOpen] = React.useState(false);
+  //хук для сообщения об успешной/неуспешной авторизации
   const [toolTipMessage, setToolTipMessage] = React.useState({});
+  //хук для открытия попапа большой картинки
   const [selectedCard, setSelectedCard] = React.useState({ name: "", link: "" });
+  //хук для текущего пользователя
   const [currentUser, setCurrentUser] = React.useState({});
+  //хук для карточек
   const [cards, setCards] = React.useState([]);
   const [cardDelete, setCardDelete] = React.useState();
+  //хук для состояния пользователя(вошел он в систему или нет)
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  //пропсы на открытие попапов
   const propsMain = {
 	onEditAvatar: handleEditAvatarClick,
 	onEditProfile: handleEditProfileClick,
@@ -42,6 +52,18 @@ function App() {
   }
 
   const history = useHistory();
+
+  React.useEffect(() => {
+    tokenCheck();
+      if(isLoggedIn)
+        Promise.all([api.getInitialCards(), api.getUserInfo()])
+
+          .then(([cards, res]) => {
+            setCurrentUser({ ...currentUser, ...res });
+            setCards(cards);
+      })
+          .catch((err) => `Не удалось получить карточки с сервера : ${err}`);
+  }, [isLoggedIn]);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -122,12 +144,15 @@ function App() {
   }
 
   function handleCardLike(card) {
+    // Проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-
+    // Отправляем запрос в API и получаем обновлённые данные карточки
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
+        //Формируем новый массив на основе имеющегося, подставляя в него новую карточку
         setCards((state) =>
+        //Обновляем стейт
           state.map((c) => (c._id === card._id 
             ? newCard 
             : c
@@ -202,18 +227,6 @@ function App() {
 
   }
 
-  React.useEffect(() => {
-    tokenCheck();
-      if(isLoggedIn)
-        Promise.all([api.getInitialCards(), api.getUserInfo()])
-
-          .then(([cards, res]) => {
-            setCurrentUser({ ...currentUser, ...res });
-            setCards(cards);
-      })
-          .catch((err) => `Не удалось получить карточки с сервера : ${err}`);
-  }, [isLoggedIn]);
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
@@ -222,7 +235,7 @@ function App() {
             onSignOut={signOut} 
           />
           <Switch>
-          <ProtectedRoute exact path="/" component={Main} propsMain={propsMain} />
+          <ProtectedRoute exact path="/" isLoggedIn={isLoggedIn} component={Main} propsMain={propsMain} />
           <Route path='/sign-in'>
             {isLoggedIn ? <Redirect to="/" /> : <Login 
             onSubmit={handleSubmitAuth}

@@ -4,10 +4,11 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 function Card(props) {
 	const currentUser = React.useContext(CurrentUserContext);
 
+	//вызываем обработчик handleCardClick из компонента Card
 	function handleClick() {
 		props.onCardClick(props.card);
 	}
-
+	//обработчик клика лайка проброшенный из App
 	function handleLikeClick() {
 		props.onCardLike(props.card);
 	}
@@ -16,14 +17,18 @@ function Card(props) {
 		props.onCardDelete(props.card);
 	}
 
+	//Определяем, являемся ли мы владельцем текущей карточки
 	const isOwn = props.card.owner._id === currentUser._id;
+	//Создаём переменную, которую после зададим в `className` для кнопки удаления
 	const cardDeleteButtonClassName = (
 		`${isOwn
 			? 'element__trash element__trash_show'
 			: 'element__trash'}`
 	);
 
+	//Определяем, есть ли у карточки лайк, поставленный текущим пользователем
 	const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+	//Создаём переменную, которую после зададим в `className` для кнопки лайка
 	const cardLikeButtonClassName = (
 		`${isLiked
 			? 'element__like element__like_type_black'
