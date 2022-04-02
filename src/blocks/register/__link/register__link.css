@@ -11,6 +11,7 @@
 	background-color: transparent;
 	transition: opacity 3s;
 	border: 0;
+	margin-top: 51px;
 }
 
 .register__link:hover {

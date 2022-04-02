@@ -1,5 +1,4 @@
 import React from "react";
-import "../index.css";
 import Header from "../components/Header.js";
 import Main from "../components/Main.js";
 import ImagePopup from "../components/ImagePopup.js";
@@ -61,7 +60,7 @@ function App() {
         Promise.all([api.getInitialCards(), api.getUserInfo()])
 
           .then(([cards, res]) => {
-            setCurrentUser({ ...currentUser, ...res });
+            setCurrentUser(res);
             setCards(cards);
       })
           .catch((err) => `Не удалось получить карточки с сервера : ${err}`);
