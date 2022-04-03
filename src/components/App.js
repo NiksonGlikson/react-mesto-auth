@@ -16,6 +16,7 @@ import ProtectedRoute from "../components/ProtectedRoute.js";
 import successfulRegistr from "../images/good.svg";
 import unSuccessfulRegistr from "../images/bad.svg";
 import auth from "../utils/auth.js";
+import {defaultUser} from '../utils/constants.js';
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
   //хук для открытия попапа большой картинки
   const [selectedCard, setSelectedCard] = React.useState({ name: "", link: "" });
   //хук для текущего пользователя
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState(defaultUser);
   //хук для карточек
   const [cards, setCards] = React.useState([]);
   //хук для удаления картинки именно нашей картинки
@@ -59,8 +60,8 @@ function App() {
       if(isLoggedIn)
         Promise.all([api.getInitialCards(), api.getUserInfo()])
 
-          .then(([cards, res]) => {
-            setCurrentUser(res);
+          .then(([cards, userInfo]) => {
+            setCurrentUser({ ...currentUser, userInfo });
             setCards(cards);
       })
           .catch((err) => `Не удалось получить карточки с сервера : ${err}`);
@@ -102,26 +103,23 @@ function App() {
 	});
   }
 
-  function handleUpdateUser(currentUser) {
+  function handleUpdateUser(user) {
     api
-      .editUserInfo({ 
-		  name: currentUser.name, 
-		  about: currentUser.about 
-		})
-      .then((res) => {
-        setCurrentUser(res);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(`${err}`);
-      });
-  }
+      .editUserInfo(user)
+        .then((userInfo) => {
+          setCurrentUser({ ...currentUser, userInfo });
+          closeAllPopups();
+        })
+        .catch((err) => {
+          console.log(`${err}`);
+        });
+    }
 
   function handleUpdateAvatar(avatar) {
     api
       .editUserAvatar(avatar)
-      .then((res) => {
-        setCurrentUser(res);
+      .then((userInfo) => {
+        setCurrentUser({ ...currentUser, ...userInfo });
         closeAllPopups();
       })
       .catch((err) => {
@@ -210,10 +208,10 @@ function App() {
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt');
     if(jwt) {
-      setIsLoggedIn(true)
       auth.getUser(jwt)
         .then(({ data: { email } }) => {
           setCurrentUser({ ...currentUser, email })
+          setIsLoggedIn(true)
       })
         .catch((err) => {
           console.log(err)
