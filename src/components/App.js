@@ -16,7 +16,6 @@ import ProtectedRoute from "../components/ProtectedRoute.js";
 import successfulRegistr from "../images/good.svg";
 import unSuccessfulRegistr from "../images/bad.svg";
 import auth from "../utils/auth.js";
-import {defaultUser} from '../utils/constants.js';
 
 
 function App() {
@@ -35,7 +34,7 @@ function App() {
   //хук для открытия попапа большой картинки
   const [selectedCard, setSelectedCard] = React.useState({ name: "", link: "" });
   //хук для текущего пользователя
-  const [currentUser, setCurrentUser] = React.useState(defaultUser);
+  const [currentUser, setCurrentUser] = React.useState({});
   //хук для карточек
   const [cards, setCards] = React.useState([]);
   //хук для удаления картинки именно нашей картинки
@@ -61,7 +60,7 @@ function App() {
         Promise.all([api.getInitialCards(), api.getUserInfo()])
 
           .then(([cards, userInfo]) => {
-            setCurrentUser({ ...currentUser, userInfo });
+            setCurrentUser({ ...currentUser, ...userInfo });
             setCards(cards);
       })
           .catch((err) => `Не удалось получить карточки с сервера : ${err}`);
@@ -107,7 +106,7 @@ function App() {
     api
       .editUserInfo(user)
         .then((userInfo) => {
-          setCurrentUser({ ...currentUser, userInfo });
+          setCurrentUser({ ...currentUser, ...userInfo });
           closeAllPopups();
         })
         .catch((err) => {
