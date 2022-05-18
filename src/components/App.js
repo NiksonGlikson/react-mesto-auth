@@ -58,7 +58,6 @@ function App() {
     tokenCheck();
       if(isLoggedIn)
         Promise.all([api.getInitialCards(), api.getUserInfo()])
-
           .then(([cards, userInfo]) => {
             setCurrentUser({ ...currentUser, ...userInfo });
             setCards(cards);

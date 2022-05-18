@@ -1,6 +1,6 @@
 class Api {
-	constructor({ urlAdress, token }) {
-		this._urlAdress = urlAdress;
+	constructor({ adress, token }) {
+		this._adress = adress;
 		this._token = token;
 	}
 
@@ -12,17 +12,16 @@ class Api {
     }
 
 	getInitialCards() {
-		return fetch(`${this._urlAdress}/cards`, {
+		return fetch(`${this._adress}/cards`, {
 			headers: {
 				authorization: this._token,
-				'Content-Type': 'application/json',
 			}
 		})
 		.then(this._getResponse);
 	}
 
 	createCard({ name, link }) {
-		return fetch(`${this._urlAdress}/cards`, {
+		return fetch(`${this._adress}/cards`, {
 			method: 'POST',
 			headers: {
 				authorization: this._token,
@@ -37,22 +36,20 @@ class Api {
 	}
 
 	handleLike(id) {
-		return fetch(`${this._urlAdress}/cards/likes/${id}`, {
+		return fetch(`${this._adress}/cards/likes/${id}`, {
 		  method: 'PUT',
 		  headers: {
 		  	authorization: this._token,
-			  'Content-Type': 'application/json',
 		}
 	  })		
 	  .then(this._getResponse)
 	}
 
 	removeLikeCard(id) {
-		return fetch(`${this._urlAdress}/cards/likes/${id}`, {
+		return fetch(`${this._adress}/cards/likes/${id}`, {
 		  method: 'DELETE',
 		  headers: {
 			authorization: this._token,
-			'Content-Type': 'application/json',
 		}
 	  })
 	  .then(this._getResponse)
@@ -68,28 +65,26 @@ class Api {
 	}
 
 	handleDelete(id) {
-		return fetch(`${this._urlAdress}/cards/${id}`, {
+		return fetch(`${this._adress}/cards/${id}`, {
 		  method: 'DELETE',
 		  headers: {
 			  authorization: this._token,
-			  'Content-Type': 'application/json',
 		}
 		})		
 		.then(this._getResponse)
 	}
 
 	getUserInfo() {
-		return fetch(`${this._urlAdress}/users/me`, {
+		return fetch(`${this._adress}/users/me`, {
 			headers: {
 				authorization: this._token,
-				'Content-Type': 'application/json',
 			}
 		})
 		.then(this._getResponse)
 	}
 
 	editUserInfo({ name, about }) {
-		return fetch(`${this._urlAdress}/users/me`, {
+		return fetch(`${this._adress}/users/me`, {
 			method: 'PATCH',
 			headers: {
 				authorization: this._token,
@@ -104,7 +99,7 @@ class Api {
 	}
 
 	editUserAvatar(avatar) {
-		return fetch(`${this._urlAdress}/users/me/avatar`, {
+		return fetch(`${this._adress}/users/me/avatar`, {
 		  method: 'PATCH',
 		  headers: {
 			  authorization: this._token,
@@ -119,9 +114,8 @@ class Api {
 }
 
 const api = new Api({
-	urlAdress: 'https://mesto.nomoreparties.co/v1/cohort-35',
+	adress: 'https://mesto.nomoreparties.co/v1/cohort-35/',
 	token: '8f16ac3a-0753-4a70-b9e1-5f31aba6605c',
-	'Content-Type': 'application/json'
   });
 
 export default api;

@@ -27,6 +27,7 @@ class Auth {
 	authorization({ email, password }) {
 		return fetch(`${this._adress}/signin`, {
 			method: "POST",
+			credentials: "include",
 			headers: {
 				"Content-Type": "application/json"
 			},
@@ -41,6 +42,7 @@ class Auth {
 	getUser(jwt) {
 		return fetch(`${this._adress}/users/me`, {
 			method: "GET",
+			credentials: "include",
 			headers: {
 				authorization: `Bearer ${jwt}`,
 				"Content-Type": "application/json"
@@ -50,6 +52,6 @@ class Auth {
 	}
 }
 
-const auth = new Auth('https://auth.nomoreparties.co');
+const auth = new Auth("https://api.domainname.glinkin.nomoreparties.sbs");
 
 export default auth;
