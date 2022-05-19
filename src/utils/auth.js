@@ -1,6 +1,6 @@
 class Auth {
-	constructor(adress) {
-		this._adress = adress;
+	constructor(address) {
+		this._address = address;
 	}
 
 	_handleResponse = (response) => {
@@ -11,7 +11,7 @@ class Auth {
 	};
 
 	registration({ email, password }) {
-		return fetch(`${this._adress}/signup`, {
+		return fetch(`${this._address}/signup`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -25,7 +25,7 @@ class Auth {
 	}
 
 	authorization({ email, password }) {
-		return fetch(`${this._adress}/signin`, {
+		return fetch(`${this._address}/signin`, {
 			method: "POST",
 			credentials: "include",
 			headers: {
@@ -40,7 +40,7 @@ class Auth {
 	}
 
 	getUser(jwt) {
-		return fetch(`${this._adress}/users/me`, {
+		return fetch(`${this._address}/users/me`, {
 			method: "GET",
 			credentials: "include",
 			headers: {

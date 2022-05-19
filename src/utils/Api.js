@@ -1,6 +1,6 @@
 class Api {
-	constructor({ adress, token }) {
-		this._adress = adress;
+	constructor({ address, token }) {
+		this._address = address;
 		this._token = token;
 	}
 
@@ -12,7 +12,7 @@ class Api {
     }
 
 	getInitialCards() {
-		return fetch(`${this._adress}/cards`, {
+		return fetch(`${this._address}/cards`, {
 			headers: {
 				authorization: this._token,
 			}
@@ -21,7 +21,7 @@ class Api {
 	}
 
 	createCard({ name, link }) {
-		return fetch(`${this._adress}/cards`, {
+		return fetch(`${this._address}/cards`, {
 			method: 'POST',
 			headers: {
 				authorization: this._token,
@@ -36,7 +36,7 @@ class Api {
 	}
 
 	handleLike(id) {
-		return fetch(`${this._adress}/cards/likes/${id}`, {
+		return fetch(`${this._address}/cards/likes/${id}`, {
 		  method: 'PUT',
 		  headers: {
 		  	authorization: this._token,
@@ -46,7 +46,7 @@ class Api {
 	}
 
 	removeLikeCard(id) {
-		return fetch(`${this._adress}/cards/likes/${id}`, {
+		return fetch(`${this._address}/cards/likes/${id}`, {
 		  method: 'DELETE',
 		  headers: {
 			authorization: this._token,
@@ -65,7 +65,7 @@ class Api {
 	}
 
 	handleDelete(id) {
-		return fetch(`${this._adress}/cards/${id}`, {
+		return fetch(`${this._address}/cards/${id}`, {
 		  method: 'DELETE',
 		  headers: {
 			  authorization: this._token,
@@ -75,7 +75,7 @@ class Api {
 	}
 
 	getUserInfo() {
-		return fetch(`${this._adress}/users/me`, {
+		return fetch(`${this._address}/users/me`, {
 			headers: {
 				authorization: this._token,
 			}
@@ -84,7 +84,7 @@ class Api {
 	}
 
 	editUserInfo({ name, about }) {
-		return fetch(`${this._adress}/users/me`, {
+		return fetch(`${this._address}/users/me`, {
 			method: 'PATCH',
 			headers: {
 				authorization: this._token,
@@ -99,7 +99,7 @@ class Api {
 	}
 
 	editUserAvatar(avatar) {
-		return fetch(`${this._adress}/users/me/avatar`, {
+		return fetch(`${this._address}/users/me/avatar`, {
 		  method: 'PATCH',
 		  headers: {
 			  authorization: this._token,
@@ -114,7 +114,7 @@ class Api {
 }
 
 const api = new Api({
-	adress: 'https://mesto.nomoreparties.co/v1/cohort-35/',
+	address: 'https://mesto.nomoreparties.co/v1/cohort-35/',
 	token: '8f16ac3a-0753-4a70-b9e1-5f31aba6605c',
   });
 
