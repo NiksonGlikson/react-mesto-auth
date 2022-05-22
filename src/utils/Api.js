@@ -13,6 +13,7 @@ class Api {
 
 	getInitialCards() {
 		return fetch(`${this._address}/cards`, {
+			credentials: "include",
 			headers: {
 				authorization: this._token,
 			}
@@ -23,6 +24,7 @@ class Api {
 	createCard({ name, link }) {
 		return fetch(`${this._address}/cards`, {
 			method: 'POST',
+			credentials: "include",
 			headers: {
 				authorization: this._token,
 				'Content-Type': 'application/json',
@@ -38,6 +40,7 @@ class Api {
 	handleLike(id) {
 		return fetch(`${this._address}/cards/likes/${id}`, {
 		  method: 'PUT',
+		  credentials: "include",
 		  headers: {
 		  	authorization: this._token,
 		}
@@ -48,6 +51,7 @@ class Api {
 	removeLikeCard(id) {
 		return fetch(`${this._address}/cards/likes/${id}`, {
 		  method: 'DELETE',
+		  credentials: "include",
 		  headers: {
 			authorization: this._token,
 		}
@@ -67,6 +71,7 @@ class Api {
 	handleDelete(id) {
 		return fetch(`${this._address}/cards/${id}`, {
 		  method: 'DELETE',
+		  credentials: "include",
 		  headers: {
 			  authorization: this._token,
 		}
@@ -76,6 +81,7 @@ class Api {
 
 	getUserInfo() {
 		return fetch(`${this._address}/users/me`, {
+			credentials: "include",
 			headers: {
 				authorization: this._token,
 			}
@@ -86,6 +92,7 @@ class Api {
 	editUserInfo({ name, about }) {
 		return fetch(`${this._address}/users/me`, {
 			method: 'PATCH',
+			credentials: "include",
 			headers: {
 				authorization: this._token,
 				'Content-Type': 'application/json',
@@ -101,6 +108,7 @@ class Api {
 	editUserAvatar(avatar) {
 		return fetch(`${this._address}/users/me/avatar`, {
 		  method: 'PATCH',
+		  credentials: "include",
 		  headers: {
 			  authorization: this._token,
 			  'Content-Type': 'application/json',
@@ -114,8 +122,8 @@ class Api {
 }
 
 const api = new Api({
-	address: 'https://mesto.nomoreparties.co/v1/cohort-35/',
-	token: '8f16ac3a-0753-4a70-b9e1-5f31aba6605c',
+	address: 'https://api.domainname.glinkin.nomoreparties.sbs',
+	// token: '8f16ac3a-0753-4a70-b9e1-5f31aba6605c',
   });
 
 export default api;

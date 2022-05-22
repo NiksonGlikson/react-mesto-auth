@@ -207,7 +207,7 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     if(jwt) {
       auth.getUser(jwt)
-        .then(({ data: { email } }) => {
+        .then(([{ email }]) => {
           setCurrentUser({ ...currentUser, email })
           setIsLoggedIn(true)
       })
